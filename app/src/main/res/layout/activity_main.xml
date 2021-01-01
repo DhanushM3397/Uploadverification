@@ -401,6 +401,15 @@
             android:background="@color/colorPrimary"
             android:text="submit"
             android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/bt_report"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="report"
+            android:textColor="#fff" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

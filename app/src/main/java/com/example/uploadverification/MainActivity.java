@@ -2,6 +2,7 @@ package com.example.uploadverification;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init() {
+        bt_report=findViewById(R.id.bt_report);
         et_greenEnergy = findViewById(R.id.et_greenEnergy);
         et_jeevanaMadhura = findViewById(R.id.et_jeevanaMadhura);
         et_niranthara = findViewById(R.id.et_niranthara);
@@ -62,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 inertData();
+            }
+        });
+        bt_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getApplicationContext(), Reportdispaly.class);
+                startActivity(in);
             }
         });
 
@@ -223,7 +232,12 @@ public class MainActivity extends AppCompatActivity {
         transport_model.setPHSCCollection(et_PHSCCollection.getText().toString());
 
 
-        databaseHelper.insertdata(transport_model, databaseHelper);
-        Toast.makeText(getApplicationContext(), "Inserted", Toast.LENGTH_LONG).show();
+        Long status = databaseHelper.insertdata(transport_model, databaseHelper);
+        if (status == 1) {
+            Toast.makeText(getApplicationContext(), "Inserted", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "not inserted", Toast.LENGTH_LONG).show();
+        }
+
     }
 }

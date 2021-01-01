@@ -25,7 +25,7 @@ public class DatabaseHelper extends Application {
     }
 
 
-    public boolean insertdata(Transport_Model transport_model, DatabaseHelper databaseHelper) {
+    public Long insertdata(Transport_Model transport_model, DatabaseHelper databaseHelper) {
         open();
         ContentValues contentValues = new ContentValues();
         contentValues.put("GreenEnergy", transport_model.getGreenEnergy());
@@ -57,7 +57,7 @@ public class DatabaseHelper extends Application {
         contentValues.put("PHSCCollection", transport_model.getPHSCCollection());
         long result = myDataBase.insert("TRANSPORT", null, contentValues);
         close();
-        return result != -1;
+        return result ;
     }
 
   /*  public boolean insertInMastOut(ContentValues cv) {
@@ -78,44 +78,56 @@ public class DatabaseHelper extends Application {
     }*/
 
 
-    /*  public ArrayList<Transport_Model> getAllTransport() {
-          ArrayList<Transport_Model> transportModelArrayList = new ArrayList<Transport_Model>();
-          // Select All Query
-          String selectQuery = "SELECT  * FROM TRANSPORT";
+    public ArrayList<Transport_Model> getAllTransport() {
+        ArrayList<Transport_Model> transportModelArrayList = new ArrayList<Transport_Model>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM TRANSPORT";
 
-          open();
-          Cursor cursor = myDataBase.rawQuery(selectQuery, null);
+        open();
+        Cursor cursor = myDataBase.rawQuery(selectQuery, null);
 
-          // looping through all rows and adding to list
-          if (cursor.moveToFirst()) {
-              do {
-                  Transport_Model transport_model = new Transport_Model();
-                  transport_model.setNAME(cursor.getString(1));
-                  transport_model.setPHONENO(cursor.getString(2));
-                  transport_model.setTYPE_OF_TANK(cursor.getString(3));
-                  transport_model.setRO_NAME(cursor.getString(4));
-                  transport_model.setDISTRICT_OFFICE_NAME(cursor.getString(5));
-                  transport_model.setPROJECT_OFFICE_NAME(cursor.getString(6));
-                  transport_model.setVILLAGE_NAME(cursor.getString(7));
-                  transport_model.setTANK_NAME(cursor.getString(8));
-                  transport_model.setWORK_START_TIME(cursor.getString(9));
-                  transport_model.setNO_MACHINE_DEPLOYED(cursor.getString(10));
-                  transport_model.setHITACHI_WORK_START_TIME(cursor.getString(11));
-                  transport_model.setHITACHI_WORK_END_TIME(cursor.getString(12));
-                  transport_model.setJCB_WORK_START_TIME(cursor.getString(13));
-                  transport_model.setJCB_WORK_END_TIME(cursor.getString(14));
-                  transport_model.setSILT_TRANSPORTATION(cursor.getString(15));
-                  transport_model.setNO_SILT_TRANSPORTATION(cursor.getString(16));
-                  transport_model.setRole(cursor.getString(17));
-                  // Adding contact to list
-                  transportModelArrayList.add(transport_model);
-              } while (cursor.moveToNext());
-          }
-          close();
-          // return contact list
-          return transportModelArrayList;
-      }
-  */
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Transport_Model transport_model = new Transport_Model();
+                transport_model.setGreenEnergy(cursor.getString(1));
+                transport_model.setJeevanaMadhura(cursor.getString(2));
+                transport_model.setNiranthara(cursor.getString(3));
+                transport_model.setNPSS(cursor.getString(4));
+                transport_model.setsHGLoanRecovery(cursor.getString(5));
+                transport_model.setSuraksha(cursor.getString(6));
+                transport_model.setDivisionUpload(cursor.getString(7));
+                transport_model.setDivisionwiseTransaction1(cursor.getString(8));
+                transport_model.setGroupwiseOtherTrans(cursor.getString(9));
+                transport_model.setGroupwiseTrans(cursor.getString(10));
+                transport_model.setMembRecoveryStlmnt(cursor.getString(11));
+
+                transport_model.setMemberLoanAdjustment(cursor.getString(12));
+                transport_model.setMemberLoanClosure(cursor.getString(13));
+                transport_model.setMemberLoanRegularDisbursemen(cursor.getString(14));
+                transport_model.setMemberLoanSpecialDisbursement(cursor.getString(15));
+                transport_model.setMemberTermination(cursor.getString(16));
+                transport_model.setMemberwiseTransaction(cursor.getString(17));
+                transport_model.setNonCardAmount(cursor.getString(18));
+                transport_model.setSHGLoanRecoverynoncash(cursor.getString(19));
+                transport_model.setTerminatedSHGBalance(cursor.getString(20));
+                transport_model.setGSTUnregistered(cursor.getString(21));
+                transport_model.setTerminatedSHGBalance2(cursor.getString(22));
+                transport_model.setDestituteCompensation(cursor.getString(23));
+                transport_model.setDivisionwiseTransaction2(cursor.getString(24));
+                transport_model.setNirantharaSubscription2(cursor.getString(25));
+                transport_model.setLICPremiumCashCollection(cursor.getString(26));
+                transport_model.setPHSCCollection(cursor.getString(27));
+
+                // Adding contact to list
+                transportModelArrayList.add(transport_model);
+            } while (cursor.moveToNext());
+        }
+        close();
+        // return contact list
+        return transportModelArrayList;
+    }
+
     //Open database
     public void open() {
         myDataBase = mh.getWritableDatabase();
